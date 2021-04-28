@@ -1,0 +1,36 @@
+// SPDX-Licence-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract DerechosDeAutor{
+    address owner ;
+    uint[] Canciones ;
+    mapping(address => Cancion) DerechosDeAutor ;
+    struct Cancion{
+        uint identificacion;
+        string autor;
+        string duracion;
+        string nombrec;
+        uint preciouso;
+    }
+
+    function anadirCancion (uint _id, string memory _autor, string memory _duracion, string memory _nomC, uint _prec) public payable{
+        Canciones.push(_id);
+        DerechosDeAutor[msg.sender].identificacion= _id;
+        DerechosDeAutor[msg.sender].autor= _autor;
+        DerechosDeAutor[msg.sender].duracion= _duracion;
+        DerechosDeAutor[msg.sender].nombrec= _nomC;
+        DerechosDeAutor[msg.sender].preciouso= _prec;
+    }
+
+    function verIdentificacion()external view returns(uint){
+        return Canciones.length;
+    }
+
+    function verCancion()external view returns(string memory autor,string memory duracion, string memory nombrec, uint preciouso){
+        autor = DerechosDeAutor[msg.sender].autor;
+        duracion = DerechosDeAutor[msg.sender].duracion;
+        nombrec = DerechosDeAutor [msg.sender].nombrec;
+        preciouso = DerechosDeAutor [msg.sender].preciouso;
+
+    }
+}
